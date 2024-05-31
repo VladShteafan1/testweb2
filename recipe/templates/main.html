@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page</title>
+</head>
+<body>
+    <h1>Latest Recipes</h1>
+    <ul>
+        {% for recipe in latest_recipes %}
+        <li>{{ recipe.name }} - {{ recipe.created_at }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
