@@ -9,9 +9,28 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import environ
 from pathlib import Path
 import os
+# Визначення BASE_DIR
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Ініціалізація django-environ
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+# Зчитування .env файлу
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+# Використання змінних з .env файлу
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
+
+# Налаштування бази даних
+DATABASES = {
+    'default': env.db(),
+}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
